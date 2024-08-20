@@ -5,16 +5,31 @@
 void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n);
 
 void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n) {
+    nums1 += (m-1);
+    nums2 += (n-1);
+    int *k = nums1 + n; 
+
+    for(int i = 0; i < (m+n-1); i++){
+        if (*nums1 > *nums2) {
+            *k-- = *nums1--;
+        } else {
+            *k-- = *nums2--;
+        }
+    }
+    printf("*nums1: %d, *k: %d, *nums2: %d\n", *nums1, *k, *nums2);
+    printf("nums1: %p, k: %p, nums2: %p\n", nums1, k, nums2);
+
     return;
 }
 
 int main() {
-    int nums1[] = {1,2,3,0,0,0};
+    int nums1[] = {2,2,3,0,0,0};
     int m = 3;
-    int nums2[] = {2,5,6};
+    int nums2[] = {1,5,6};
     int n = 3;
+    printf("*nums1: %d, nums1: %p\n", *nums1, nums1);
 
-    merge(&nums1, 2, m, &nums2, 2,n);
+    merge(nums1, sizeof(int), m, nums2, sizeof(int), n);
 
     for(int i = 0; i < m+n; i++){
         printf("%d", nums1[i]);
