@@ -5,19 +5,29 @@
 void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n);
 
 void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n) {
-    nums1 += (m-1);
-    nums2 += (n-1);
-    int *k = nums1 + n; 
+    int *temp = nums1 -1;
+    *temp = 0;
+    temp = nums2 -1;
+    *temp = 0;
 
-    for(int i = 0; i < (m+n-1); i++){
-        if (*nums1 > *nums2) {
-            *k-- = *nums1--;
+    int *j = nums1 + (m-1);
+    nums2 += (n-1);
+    int *k = j + n; 
+
+    for(int i = 0; i < (m+n); i++){
+        printf("*j: %d, *k: %d, *nums2: %d\n", *j, *k, *nums2);
+        for(int i = 0; i < m+n; i++){
+            printf("%d", nums1[i]);
+        }
+        printf("\n");
+        if (*j > *nums2) {
+            *k-- = *j--;
         } else {
             *k-- = *nums2--;
         }
     }
-    printf("*nums1: %d, *k: %d, *nums2: %d\n", *nums1, *k, *nums2);
-    printf("nums1: %p, k: %p, nums2: %p\n", nums1, k, nums2);
+    printf("*j: %d, *k: %d, *nums2: %d\n", *j, *k, *nums2);
+    printf("j: %p, k: %p, nums2: %p\n", j, k, nums2);
 
     return;
 }
